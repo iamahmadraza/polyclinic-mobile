@@ -1,0 +1,3 @@
+export const GET_PRODUCTS = 'app/Home/GET_PRODUCTS';
+export const GET_PRODUCTS_SUCCESS = 'app/Home/GET_PRODUCTS_SUCCESS';
+export const GET_PRODUCTS_FAILED = 'app/Home/GET_PRODUCTS_FAILED';

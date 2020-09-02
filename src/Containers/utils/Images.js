@@ -10,6 +10,7 @@ const images = {
   clinicalProcedure: require('../../Assets/Images/medicalProcdure.png'),
   searchDisease: require('../../Assets/Images/searchDisease.png'),
   medicalHistory: require('../../Assets/Images/medicalHistory.png'),
+  doctor: require('../../Assets/Images/doctor.png'),
   // ui: require('../assets/images/ui.png'),
   // uiclosed: require('../assets/images/uiclosed.png'),
   // loader: require('../assets/images/loader.gif'),

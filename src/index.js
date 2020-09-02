@@ -8,6 +8,7 @@ import Splash from './Containers/SplashScreen/';
 import {NavigationContainer} from '@react-navigation/native';
 import 'react-native-gesture-handler';
 import SignUp from './Containers/SignUp';
+import DoctorList from './Containers/DoctorList';
 const Stack = createStackNavigator();
 
 function AuthStack() {
@@ -35,6 +36,13 @@ function AuthStack() {
         component={Speciality}
         options={{
           title: 'Choose Speciality',
+        }}
+      />
+      <Stack.Screen
+        name="DoctorList"
+        component={DoctorList}
+        options={{
+          title: 'Doctors',
         }}
       />
     </Stack.Navigator>

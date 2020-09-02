@@ -4,6 +4,7 @@ import styles from './styles';
 import {connect} from 'react-redux';
 import Container from '../../Components/Container';
 import {Images} from '../utils';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const DATA = [
   {
@@ -29,9 +30,10 @@ const DATA = [
 ];
 
 const Item = (data) => {
-  console.log(data);
   return (
-    <View style={styles.listContainer}>
+    <TouchableOpacity
+      style={styles.listContainer}
+      onPress={() => data.props.navigation.navigate('DoctorList')}>
       <View style={styles.listInnerContainer}>
         <Image
           style={styles.listIcon}
@@ -48,13 +50,13 @@ const Item = (data) => {
         source={Images.arrow}
         resizeMode="contain"
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const Speciality = (props) => {
   const renderItem = ({item}) => (
-    <Item title={item.title} description={item.description} />
+    <Item title={item.title} description={item.description} props={props} />
   );
 
   return (

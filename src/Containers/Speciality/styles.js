@@ -15,7 +15,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     // backgroundColor: 'red',
-    width: Metrics.screenWidth,
+    width: Metrics.screenWidth - 20,
     padding: Metrics.baseMargin,
     marginTop: Metrics.baseMargin,
     backgroundColor: 'white',

@@ -36,7 +36,7 @@ const metrics = {
   tabBarHieghtIphoneX: 85,
   tabBarHeightAndroid: 65,
   textInputHeight: Platform.OS === 'ios' ? 30 : 40,
-  buttonRadius: 4,
+  buttonRadius: 8,
   cardWidth: 350,
   icons: {
     tiny: 15,
