@@ -1,9 +1,9 @@
-import {StyleSheet, Platform} from 'react-native';
-import {Metrics, Adjust, Fonts, Colors} from '../../utils';
+import {StyleSheet} from 'react-native';
+import {Metrics, Fonts, Colors} from '../../Containers/utils';
 export default StyleSheet.create({
   feildContainer: {
-    width: '100%',
-    paddingHorizontal: 44,
+    width: Metrics.screenWidth - 50,
+    marginHorizontal: 50,
   },
   fieldLabel: {
     ...Fonts.style.label,
@@ -14,10 +14,11 @@ export default StyleSheet.create({
     paddingVertical: 5,
   },
   input: {
-    width: 320,
     height: 48,
     paddingHorizontal: 13,
     backgroundColor: '#ffffff',
+    borderColor: Colors.appColor,
+    borderWidth: 1,
     borderRadius: 5,
     ...Fonts.style.input,
   },

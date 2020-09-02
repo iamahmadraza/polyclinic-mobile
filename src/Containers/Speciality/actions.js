@@ -3,13 +3,13 @@ import {
   GET_PRODUCTS_FAILED,
   GET_PRODUCTS_SUCCESS,
 } from './constants';
-import {MedApi} from '../../Service';
+import {MedApi} from '../../services';
 
-export const getProducts = path => {
-  return dispatch => {
+export const getProducts = (path) => {
+  return (dispatch) => {
     dispatch({type: GET_PRODUCTS});
     MedApi.ProductLst(path)
-      .then(response => {
+      .then((response) => {
         console.log('CALELD', response);
         if (response.status === 200) {
           console.log(response.data);
@@ -21,7 +21,7 @@ export const getProducts = path => {
           });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch({type: GET_PRODUCTS_FAILED, message: error});
       });
   };

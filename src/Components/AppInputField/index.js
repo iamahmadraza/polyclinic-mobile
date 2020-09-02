@@ -5,10 +5,11 @@ export default class AppInputField extends React.Component {
   render() {
     return (
       <View style={[styles.feildContainer, this.props.containerStyles]}>
-        <Text style={styles.fieldLabel}>{this.props.fieldLabel}</Text>
+        {/* <Text style={styles.fieldLabel}>{this.props.fieldLabel}</Text> */}
         <TextInput
+          placeholder={this.props.fieldLabel}
           style={[styles.input, this.props.inputStyles]}
-          onChangeText={text => this.props.onChangeText(text)}
+          onChangeText={(text) => this.props.onChangeText(text)}
           autoCapitalize="none"
           secureTextEntry={this.props.secureTextEntry}
           value={this.props.value}

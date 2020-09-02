@@ -1,11 +1,12 @@
 import {Dimensions, Platform} from 'react-native';
-import  Colors from './Colors';
+import Colors from './Colors';
 const {width, height} = Dimensions.get('window');
 
 const metrics = {
   marginHorizontal: 10,
   marginVertical: 10,
   section: 25,
+  screenHeadingHeight: 50,
   baseMargin: 10,
   normalMargin: 15,
   headingWidth: 380,
@@ -53,8 +54,6 @@ const metrics = {
   containerStyle: {
     flex: 1,
     display: 'flex',
-    backgroundColor: Colors.appBackgroundColor,
-    padding: 10,
   },
 };
 

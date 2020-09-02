@@ -1,5 +1,5 @@
-import {StyleSheet, Platform} from 'react-native';
-import {Metrics, Adjust, Fonts, Colors} from '../../Containers/utils';
+import {StyleSheet} from 'react-native';
+import {Colors, Fonts} from '../../Containers/utils';
 export default StyleSheet.create({
   buttonMainContainer: {
     width: '100%',
@@ -16,11 +16,10 @@ export default StyleSheet.create({
     borderRadius: 25,
     backgroundColor: Colors.appColor,
     borderWidth: 2,
-    borderColor: Colors.textColor
+    borderColor: Colors.textColor,
   },
   buttonLabel: {
-    fontSize: 26,
+    ...Fonts.style.heading,
     color: 'white',
-    // fontFamily: 'BryantPro-Bold',
   },
 });

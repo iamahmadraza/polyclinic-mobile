@@ -15,6 +15,11 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginBottom: 30,
   },
+  logoText: {
+    fontSize: 40,
+    color: 'white',
+    fontWeight: 'bold',
+  },
   logo: {
     // width: Adjust(500),
     height: Adjust(200),

@@ -1,15 +1,15 @@
 import {GET_TAXONS, GET_TAXONS_SUCCESS, GET_TAXONS_FAILED} from './constants';
-import {MedApi} from '../../Service';
+import {MedApi} from '../../services';
 
 export const GetTaxons = () => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({type: GET_TAXONS});
     MedApi.TaxonsList()
-      .then(response => {
+      .then((response) => {
         console.log(response);
         if (response.status === 200) {
           let section = [];
-          response.data.taxons.map(t => {
+          response.data.taxons.map((t) => {
             if (t.taxons.length > 0) {
               section.push({
                 id: t.id,
@@ -17,8 +17,8 @@ export const GetTaxons = () => {
                 content: [],
               });
             } else {
-              section.map(s => {
-                if (s.id == t.parent_id) {
+              section.map((s) => {
+                if (s.id === t.parent_id) {
                   s.content = [...s.content, {...t}];
                 }
               });
@@ -29,7 +29,7 @@ export const GetTaxons = () => {
           dispatch({type: GET_TAXONS_FAILED, message: 'Something went wrong!'});
         }
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch({type: GET_TAXONS_FAILED, message: error});
       });
   };

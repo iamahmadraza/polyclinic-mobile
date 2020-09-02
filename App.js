@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
+ */
+
 import React from 'react';
 
 //For Redux
@@ -6,11 +14,11 @@ import {createStore, applyMiddleware} from 'redux';
 import ReduxThunk from 'redux-thunk';
 
 import AppContainer from './src';
-import reducers from './src/Store';
+import reducers from './store';
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
-const App = () => {
+const App: () => React$Node = () => {
   return (
     <Provider store={store}>
       <AppContainer />

@@ -3,45 +3,30 @@ import {Metrics, Fonts, Colors} from '../utils';
 export default StyleSheet.create({
   container: {
     ...Metrics.containerStyle,
-    paddingTop: 0
+    justifyContent: 'center',
   },
-  heading: {
-    ...Fonts.style.heading,
-    color: Colors.appColor
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: "space-between",
-    alignItems: 'center',
-    height: 60,
-    marginVertical: 5,
-    backgroundColor: Colors.appColor,
+  card: {
+    height: Metrics.screenWidth / 2 - 30,
+    width: Metrics.screenWidth / 2 - 30,
+    backgroundColor: 'white',
     borderWidth: 1,
     borderColor: Colors.appColor,
+    margin: 10,
     borderRadius: 5,
-    padding: 10,
-  },
-  headerText: {
-    ...Fonts.style.heading
-  },
-  headerIcon: {
-    height: 15,
-    width: 15
-  },
-  subCategory: {
-    flexDirection: 'row',
-    justifyContent: "space-between",
     alignItems: 'center',
-    height: 60,
-    marginVertical: 1,
-    backgroundColor: Colors.textColor,
-    borderBottomWidth: 1,
-    borderColor: Colors.appColor,
-    borderRadius: 3,
-    padding: 10
+    justifyContent: 'center',
   },
-  subCategoryText: {
+  cardText: {
     ...Fonts.style.subHeading,
-    color: 'black'
-  }
+    fontSize: Fonts.size.medium,
+    color: Colors.appColor,
+  },
+  cardLogo: {
+    height: '25%',
+    marginBottom: 20,
+  },
+  cardContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
 });

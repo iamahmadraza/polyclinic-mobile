@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  StatusBar,
+  SafeAreaView,
+} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import AppInputField from '../../Components/AppInputField/index';
 import AppButton from '../../Components/AppButton';
@@ -7,9 +14,9 @@ import ScreenHeading from '../../Components/ScreenHeading';
 import styles from './styles';
 import {connect} from 'react-redux';
 import {UserLogin} from './actions';
-import {Validation} from '../utils';
+import {Validation, Metrics} from '../utils';
 
-const Login = (props) => {
+const SignUp = (props) => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [userNameError, setUserNameError] = useState('');
@@ -36,9 +43,6 @@ const Login = (props) => {
   };
 
   const onSubmit = async () => {
-    props.navigation.reset({
-      routes: [{name: 'Auth'}],
-    });
     // await validationCheck('password');
     // await validationCheck('username');
     // if (userNameError === '' && passError === '') {
@@ -50,16 +54,13 @@ const Login = (props) => {
     // }
   };
 
-  const forgotPassword = () => {
-    props.navigation.navigate('ForgotPassword', {});
-  };
-
   return (
     <SafeAreaView style={styles.container}>
-      <ScreenHeading name="Sign In" />
+      <StatusBar backgroundColor="#0061ff" barStyle="light-content" />
+      <ScreenHeading name="Sign Up" />
       <KeyboardAwareScrollView contentContainerStyle={styles.innerContainer}>
         <AppInputField
-          containerStyles={styles.userNameInput}
+          containerStyles={styles.input}
           fieldLabel={'Enter Phone Number'}
           inputStyles={styles.inputStylesUsername}
           onChangeText={(text) => onChangeHandler(text, setUserName)}
@@ -67,11 +68,44 @@ const Login = (props) => {
           value={userName}
         />
         <AppInputField
-          inputStyles={styles.inputStylesPassword}
-          onChangeText={(text) => onChangeHandler(text, setPassword)}
-          fieldLabel={'Enter Password'}
-          errorText={passError}
-          secureTextEntry={true}
+          containerStyles={[styles.input, styles.marginTop]}
+          fieldLabel={'Enter Phone Number'}
+          inputStyles={styles.inputStylesUsername}
+          onChangeText={(text) => onChangeHandler(text, setUserName)}
+          errorText={userNameError}
+          value={userName}
+        />
+        <AppInputField
+          containerStyles={[styles.input, styles.marginTop]}
+          fieldLabel={'Enter Phone Number'}
+          inputStyles={styles.inputStylesUsername}
+          onChangeText={(text) => onChangeHandler(text, setUserName)}
+          errorText={userNameError}
+          value={userName}
+        />
+        <AppInputField
+          containerStyles={[styles.input, styles.marginTop]}
+          fieldLabel={'Enter Phone Number'}
+          inputStyles={styles.inputStylesUsername}
+          onChangeText={(text) => onChangeHandler(text, setUserName)}
+          errorText={userNameError}
+          value={userName}
+        />
+        <AppInputField
+          containerStyles={[styles.input, styles.marginTop]}
+          fieldLabel={'Enter Phone Number'}
+          inputStyles={styles.inputStylesUsername}
+          onChangeText={(text) => onChangeHandler(text, setUserName)}
+          errorText={userNameError}
+          value={userName}
+        />
+        <AppInputField
+          containerStyles={[styles.input, styles.marginTop]}
+          fieldLabel={'Enter Phone Number'}
+          inputStyles={styles.inputStylesUsername}
+          onChangeText={(text) => onChangeHandler(text, setUserName)}
+          errorText={userNameError}
+          value={userName}
         />
         <AppButton
           loading={props.loading}
@@ -86,14 +120,10 @@ const Login = (props) => {
         {props.error !== '' && (
           <Text style={styles.errorTextLogin}>{props.error}</Text>
         )}
-        <TouchableOpacity onPress={() => forgotPassword()}>
-          <Text style={styles.textStyle}>Forgot Password?</Text>
-        </TouchableOpacity>
-
         <View style={styles.signUpTextContainer}>
-          <Text style={styles.textStyle}>Do you have an account?</Text>
-          <TouchableOpacity onPress={() => props.navigation.navigate('SignUp')}>
-            <Text style={styles.signUpText}>Sign Up</Text>
+          <Text style={styles.textStyle}>Already have an account?</Text>
+          <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
+            <Text style={styles.signUpText}>Sign In</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAwareScrollView>
@@ -117,4 +147,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

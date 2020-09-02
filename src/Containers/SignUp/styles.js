@@ -14,9 +14,11 @@ export default StyleSheet.create({
     alignItems: 'center',
     width: Metrics.screenWidth,
   },
-  userNameInput: {
-    marginVertical: 20,
-    fontSize: 20,
+  input: {
+    ...Fonts.style.input,
+  },
+  marginTop: {
+    marginTop: 10,
   },
   loginButtonStyles: {
     marginVertical: 33,
