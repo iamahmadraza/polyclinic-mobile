@@ -1,6 +1,6 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {Colors, Fonts} from '../src/Containers/utils';
+import {Colors, Fonts} from './Containers/Utils';
 import Login from './Containers/Login';
 import Home from './Containers/Home';
 import Speciality from './Containers/Speciality';
@@ -9,9 +9,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import 'react-native-gesture-handler';
 import SignUp from './Containers/SignUp';
 import DoctorList from './Containers/DoctorList';
+import Category from './Containers/Category';
+import DoctorForm from './Containers/DoctorForm';
 const Stack = createStackNavigator();
 
-function AuthStack() {
+function PatientStack() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -49,6 +51,30 @@ function AuthStack() {
   );
 }
 
+function DoctorStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: Colors.appColor,
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          ...Fonts.style.title,
+          color: 'white',
+        },
+      }}>
+      <Stack.Screen
+        name="DoctorHome"
+        component={DoctorForm}
+        options={{
+          title: 'Home',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 export default function AppContainer() {
   return (
     <NavigationContainer>
@@ -57,7 +83,9 @@ export default function AppContainer() {
           headerShown: false,
         }}>
         <Stack.Screen name="Splash" component={Splash} />
-        <Stack.Screen name="Auth" component={AuthStack} />
+        <Stack.Screen name="Category" component={Category} />
+        <Stack.Screen name="Patient" component={PatientStack} />
+        <Stack.Screen name="Doctor" component={DoctorStack} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
       </Stack.Navigator>

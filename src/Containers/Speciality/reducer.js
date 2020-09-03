@@ -1,4 +1,8 @@
-import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILED} from './constants';
+import {
+  GET_PRODUCTS,
+  GET_PRODUCTS_SUCCESS,
+  GET_PRODUCTS_FAILED,
+} from './constants';
 
 const INITIAL_STATE = {
   error: '',

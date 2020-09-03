@@ -14,7 +14,9 @@ import ScreenHeading from '../../Components/ScreenHeading';
 import styles from './styles';
 import {connect} from 'react-redux';
 import {UserLogin} from './actions';
-import {Validation, Metrics} from '../utils';
+import {Validation} from '../Utils';
+
+import {Role} from '../Utils/Constants';
 
 const SignUp = (props) => {
   const [userName, setUserName] = useState('');
@@ -61,7 +63,7 @@ const SignUp = (props) => {
       <KeyboardAwareScrollView contentContainerStyle={styles.innerContainer}>
         <AppInputField
           containerStyles={styles.input}
-          fieldLabel={'Enter Phone Number'}
+          fieldLabel={'Enter Name'}
           inputStyles={styles.inputStylesUsername}
           onChangeText={(text) => onChangeHandler(text, setUserName)}
           errorText={userNameError}
@@ -77,7 +79,25 @@ const SignUp = (props) => {
         />
         <AppInputField
           containerStyles={[styles.input, styles.marginTop]}
-          fieldLabel={'Enter Phone Number'}
+          fieldLabel={'Enter Email'}
+          inputStyles={styles.inputStylesUsername}
+          onChangeText={(text) => onChangeHandler(text, setUserName)}
+          errorText={userNameError}
+          value={userName}
+        />
+        {props.role === Role.Doctor && (
+          <AppInputField
+            containerStyles={[styles.input, styles.marginTop]}
+            fieldLabel={'Enter PMDC'}
+            inputStyles={styles.inputStylesUsername}
+            onChangeText={(text) => onChangeHandler(text, setUserName)}
+            errorText={userNameError}
+            value={userName}
+          />
+        )}
+        <AppInputField
+          containerStyles={[styles.input, styles.marginTop]}
+          fieldLabel={'Enter Password'}
           inputStyles={styles.inputStylesUsername}
           onChangeText={(text) => onChangeHandler(text, setUserName)}
           errorText={userNameError}
@@ -85,23 +105,7 @@ const SignUp = (props) => {
         />
         <AppInputField
           containerStyles={[styles.input, styles.marginTop]}
-          fieldLabel={'Enter Phone Number'}
-          inputStyles={styles.inputStylesUsername}
-          onChangeText={(text) => onChangeHandler(text, setUserName)}
-          errorText={userNameError}
-          value={userName}
-        />
-        <AppInputField
-          containerStyles={[styles.input, styles.marginTop]}
-          fieldLabel={'Enter Phone Number'}
-          inputStyles={styles.inputStylesUsername}
-          onChangeText={(text) => onChangeHandler(text, setUserName)}
-          errorText={userNameError}
-          value={userName}
-        />
-        <AppInputField
-          containerStyles={[styles.input, styles.marginTop]}
-          fieldLabel={'Enter Phone Number'}
+          fieldLabel={'Confirm Password'}
           inputStyles={styles.inputStylesUsername}
           onChangeText={(text) => onChangeHandler(text, setUserName)}
           errorText={userNameError}
@@ -110,16 +114,12 @@ const SignUp = (props) => {
         <AppButton
           loading={props.loading}
           onPress={() => onSubmit()}
-          buttonMainContainerStyles={
-            props.error !== ''
-              ? styles.loginButtonStylesWithError
-              : styles.loginButtonStyles
-          }
-          label={'Sign In'}
+          buttonMainContainerStyles={styles.loginButtonStyles}
+          label={'Sign Up'}
         />
-        {props.error !== '' && (
+        {/* {props.error !== '' && (
           <Text style={styles.errorTextLogin}>{props.error}</Text>
-        )}
+        )} */}
         <View style={styles.signUpTextContainer}>
           <Text style={styles.textStyle}>Already have an account?</Text>
           <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
@@ -132,11 +132,9 @@ const SignUp = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const {loading, error, user} = state.loginState;
+  const {role} = state.roleState;
   return {
-    loading,
-    error,
-    user,
+    role,
   };
 };
 

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {Colors, Fonts} from '../../Containers/utils';
+import {Colors, Fonts, Adjust} from '../../Containers/Utils';
 export default StyleSheet.create({
   buttonMainContainer: {
     width: '100%',
@@ -8,18 +8,18 @@ export default StyleSheet.create({
     display: 'flex',
   },
   buttonContainer: {
-    width: 236,
+    width: Adjust(200),
     height: 52,
     justifyContent: 'center',
     alignItems: 'center',
     display: 'flex',
     borderRadius: 25,
     backgroundColor: Colors.appColor,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: Colors.textColor,
   },
   buttonLabel: {
-    ...Fonts.style.heading,
+    ...Fonts.style.label,
     color: 'white',
   },
 });

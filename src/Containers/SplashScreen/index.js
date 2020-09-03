@@ -2,17 +2,17 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, Animated} from 'react-native';
 import styles from './styles';
 import AsyncStorage from '@react-native-community/async-storage';
-import {Images} from '../utils';
+import {Images} from '../Utils';
 
 const isUserLoggin = async (navigation) => {
   await AsyncStorage.getItem('accessToken').then((value) => {
     if (value !== null) {
       navigation.reset({
-        routes: [{name: 'Auth'}],
+        routes: [{name: 'Patient'}],
       });
     } else {
       navigation.reset({
-        routes: [{name: 'Login'}],
+        routes: [{name: 'Category'}],
       });
     }
   });

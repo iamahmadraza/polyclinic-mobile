@@ -7,7 +7,8 @@ import ScreenHeading from '../../Components/ScreenHeading';
 import styles from './styles';
 import {connect} from 'react-redux';
 import {UserLogin} from './actions';
-import {Validation} from '../utils';
+import {Validation} from '../Utils';
+import {Role} from '../Utils/Constants';
 
 const Login = (props) => {
   const [userName, setUserName] = useState('');
@@ -37,7 +38,7 @@ const Login = (props) => {
 
   const onSubmit = async () => {
     props.navigation.reset({
-      routes: [{name: 'Auth'}],
+      routes: [{name: props.role === Role.Patient ? 'Patient' : 'Doctor'}],
     });
     // await validationCheck('password');
     // await validationCheck('username');
@@ -74,12 +75,12 @@ const Login = (props) => {
           secureTextEntry={true}
         />
         <AppButton
-          loading={props.loading}
+          // loading={props.loading}
           onPress={() => onSubmit()}
           buttonMainContainerStyles={
-            props.error !== ''
-              ? styles.loginButtonStylesWithError
-              : styles.loginButtonStyles
+            // props.error !== ''
+            // ? styles.loginButtonStylesWithError
+            styles.loginButtonStyles
           }
           label={'Sign In'}
         />
@@ -102,11 +103,9 @@ const Login = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const {loading, error, user} = state.loginState;
+  const {role} = state.roleState;
   return {
-    loading,
-    error,
-    user,
+    role,
   };
 };
 

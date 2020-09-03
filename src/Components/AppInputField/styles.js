@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {Metrics, Fonts, Colors} from '../../Containers/utils';
+import {Metrics, Fonts, Colors} from '../../Containers/Utils';
 export default StyleSheet.create({
   feildContainer: {
     width: Metrics.screenWidth - 50,

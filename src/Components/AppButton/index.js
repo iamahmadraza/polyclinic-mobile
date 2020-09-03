@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
-import {Colors} from '../../Containers/utils';
+import {Colors} from '../../Containers/Utils';
 import styles from './styles';
 
-export default AppButton = (props) => {
+const AppButton = (props) => {
   return (
     <View style={[styles.buttonMainContainer, props.buttonMainContainerStyles]}>
       {props.loading ? (
@@ -23,3 +23,5 @@ export default AppButton = (props) => {
     </View>
   );
 };
+
+export default AppButton;

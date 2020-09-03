@@ -3,7 +3,7 @@ import {Text, View, Image, FlatList} from 'react-native';
 import styles from './styles';
 import {connect} from 'react-redux';
 import Container from '../../Components/Container';
-import {Images} from '../utils';
+import {Images} from '../Utils';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const DATA = [
@@ -100,11 +100,11 @@ const DoctorList = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const {loading, error, taxons} = state.homeState;
+  // const {loading, error, taxons} = state.homeState;
   return {
-    loading,
-    error,
-    taxons,
+    // loading,
+    // error,
+    // taxons,
   };
 };
 

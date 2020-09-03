@@ -14,7 +14,7 @@ import {createStore, applyMiddleware} from 'redux';
 import ReduxThunk from 'redux-thunk';
 
 import AppContainer from './src';
-import reducers from './store';
+import reducers from './src/Containers/Store';
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
