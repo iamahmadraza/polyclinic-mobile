@@ -1,3 +1,3 @@
-export const LOGIN = 'app/Login/LOGIN';
-export const LOGIN_SUCCESS = 'app/Login/LOGIN_SUCCESS';
-export const LOGIN_FAILED = 'app/Login/LOGIN_FAILED';
+export const SIGNUP = 'app/SignUp/SIGNUP';
+export const SIGNUP_SUCCESS = 'app/SignUp/SIGNUP_SUCCESS';
+export const SIGNUP_FAILED = 'app/SignUp/SIGNUP_FAILED';

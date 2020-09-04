@@ -1,2 +1,2 @@
-import MedApi from './Api';
-export {MedApi};
+import polyclinicApi from './Api';
+export {polyclinicApi};

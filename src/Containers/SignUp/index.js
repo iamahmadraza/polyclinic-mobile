@@ -13,38 +13,50 @@ import AppButton from '../../Components/AppButton';
 import ScreenHeading from '../../Components/ScreenHeading';
 import styles from './styles';
 import {connect} from 'react-redux';
-import {UserLogin} from './actions';
+import {SignUpDoctor} from './actions';
 import {Validation} from '../Utils';
 
 import {Role} from '../Utils/Constants';
 
 const SignUp = (props) => {
-  const [userName, setUserName] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const [userNameError, setUserNameError] = useState('');
-  const [passError, setPassError] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [pmdc, setPMDC] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const onChangeHandler = (text, func) => {
     func(text);
   };
 
-  const validationCheck = (text) => {
-    let errorType = text;
+  // const validationCheck = (text) => {
+  //   let errorType = text;
 
-    switch (errorType) {
-      case 'username':
-        setUserNameError(Validation.Email(userName));
-        break;
-      case 'password':
-        setPassError(Validation.Password(password));
-        break;
-      default:
-        setUserNameError(Validation.Email(userName));
-        setPassError(Validation.Password(password));
-    }
-  };
+  //   switch (errorType) {
+  //     case 'username':
+  //       setUserNameError(Validation.Email(userName));
+  //       break;
+  //     case 'password':
+  //       setPassError(Validation.Password(password));
+  //       break;
+  //     default:
+  //       setUserNameError(Validation.Email(userName));
+  //       setPassError(Validation.Password(password));
+  //   }
+  // };
 
   const onSubmit = async () => {
+    const body = {
+      email,
+      phone: phoneNumber,
+      password,
+    };
+    if (props.role === Role.Doctor) {
+      body.PDMC = pmdc;
+      props.signUpDoctor(body, props.navigation);
+    }
+
     // await validationCheck('password');
     // await validationCheck('username');
     // if (userNameError === '' && passError === '') {
@@ -65,51 +77,51 @@ const SignUp = (props) => {
           containerStyles={styles.input}
           fieldLabel={'Enter Name'}
           inputStyles={styles.inputStylesUsername}
-          onChangeText={(text) => onChangeHandler(text, setUserName)}
-          errorText={userNameError}
-          value={userName}
+          onChangeText={(text) => onChangeHandler(text, setName)}
+          errorText={''}
+          value={name}
         />
         <AppInputField
           containerStyles={[styles.input, styles.marginTop]}
           fieldLabel={'Enter Phone Number'}
           inputStyles={styles.inputStylesUsername}
-          onChangeText={(text) => onChangeHandler(text, setUserName)}
-          errorText={userNameError}
-          value={userName}
+          onChangeText={(text) => onChangeHandler(text, setPhoneNumber)}
+          errorText={''}
+          value={phoneNumber}
         />
         <AppInputField
           containerStyles={[styles.input, styles.marginTop]}
           fieldLabel={'Enter Email'}
           inputStyles={styles.inputStylesUsername}
-          onChangeText={(text) => onChangeHandler(text, setUserName)}
-          errorText={userNameError}
-          value={userName}
+          onChangeText={(text) => onChangeHandler(text, setEmail)}
+          errorText={''}
+          value={email}
         />
         {props.role === Role.Doctor && (
           <AppInputField
             containerStyles={[styles.input, styles.marginTop]}
             fieldLabel={'Enter PMDC'}
             inputStyles={styles.inputStylesUsername}
-            onChangeText={(text) => onChangeHandler(text, setUserName)}
-            errorText={userNameError}
-            value={userName}
+            onChangeText={(text) => onChangeHandler(text, setPMDC)}
+            errorText={''}
+            value={pmdc}
           />
         )}
         <AppInputField
           containerStyles={[styles.input, styles.marginTop]}
           fieldLabel={'Enter Password'}
           inputStyles={styles.inputStylesUsername}
-          onChangeText={(text) => onChangeHandler(text, setUserName)}
-          errorText={userNameError}
-          value={userName}
+          onChangeText={(text) => onChangeHandler(text, setPassword)}
+          errorText={''}
+          value={password}
         />
         <AppInputField
           containerStyles={[styles.input, styles.marginTop]}
           fieldLabel={'Confirm Password'}
           inputStyles={styles.inputStylesUsername}
-          onChangeText={(text) => onChangeHandler(text, setUserName)}
-          errorText={userNameError}
-          value={userName}
+          onChangeText={(text) => onChangeHandler(text, setConfirmPassword)}
+          errorText={''}
+          value={confirmPassword}
         />
         <AppButton
           loading={props.loading}
@@ -133,15 +145,17 @@ const SignUp = (props) => {
 
 const mapStateToProps = (state) => {
   const {role} = state.roleState;
+  const {loading} = state.signUpState;
   return {
     role,
+    loading,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
-  authorizeLogin: (data, navigation) => {
-    dispatch(UserLogin(data, navigation));
+  signUpDoctor: (data, navigation) => {
+    dispatch(SignUpDoctor(data, navigation));
   },
 });
 

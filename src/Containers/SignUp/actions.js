@@ -1,27 +1,25 @@
-import {LOGIN, LOGIN_SUCCESS, LOGIN_FAILED} from './constants';
-import {MedApi} from '../../Services';
+import {SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAILED} from './constants';
+import {polyclinicApi} from '../../Services';
 import {Alert} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 
-export const UserLogin = (data, navigation) => {
+export const SignUpDoctor = (data, navigation) => {
   return (dispatch) => {
-    dispatch({type: LOGIN});
-    MedApi.Login(data, {})
+    dispatch({type: SIGNUP});
+
+    polyclinicApi
+      .SignUp(data, {})
       .then((response) => {
         if (response.status === 200) {
-          dispatch({type: LOGIN_SUCCESS, user: response.data.user});
-          let token = response.data.access_token;
-          MedApi.setHeaderWithToken(response.data.access_token);
-          AsyncStorage.setItem('accessToken', JSON.stringify(token));
+          dispatch({type: SIGNUP_SUCCESS});
           navigation.reset({
-            routes: [{name: 'Auth'}],
+            routes: [{name: 'Login'}],
           });
         } else {
-          dispatch({type: LOGIN_FAILED, message: response.data.message});
+          dispatch({type: SIGNUP_FAILED});
         }
       })
       .catch((error) => {
-        dispatch({type: LOGIN_FAILED, message: error});
+        dispatch({type: SIGNUP_FAILED});
       });
   };
 };
