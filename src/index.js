@@ -11,6 +11,9 @@ import SignUp from './Containers/SignUp';
 import DoctorList from './Containers/DoctorList';
 import Category from './Containers/Category';
 import DoctorForm from './Containers/DoctorForm';
+import AddOnlineAppoitment from './Containers/AddOnlineAppointment';
+import AddOfflineAppoitment from './Containers/AddOfflineAppointment';
+
 const Stack = createStackNavigator();
 
 function PatientStack() {
@@ -48,6 +51,20 @@ function PatientStack() {
         component={DoctorList}
         options={{
           title: 'Doctors',
+        }}
+      />
+      <Stack.Screen
+        name="OnlineAppointment"
+        component={AddOnlineAppoitment}
+        options={{
+          title: 'Create Online Appointment',
+        }}
+      />
+      <Stack.Screen
+        name="OffAppointment"
+        component={AddOfflineAppoitment}
+        options={{
+          title: 'Add Offline Appointment',
         }}
       />
     </Stack.Navigator>

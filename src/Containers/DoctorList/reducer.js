@@ -1,24 +1,26 @@
-import {GET_PRODUCTS, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILED} from './constants';
+import {
+  GET_DOCTORS,
+  GET_DOCTORS_FAILED,
+  GET_DOCTORS_SUCCESS,
+} from './constants';
 
 const INITIAL_STATE = {
-  error: '',
   loading: false,
-  products: [],
+  doctors: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case GET_PRODUCTS:
-      return {...state, error: '', loading: true};
-    case GET_PRODUCTS_SUCCESS:
+    case GET_DOCTORS:
+      return {...state, loading: true};
+    case GET_DOCTORS_SUCCESS:
       return {
         ...state,
-        error: '',
         loading: false,
-        taxons: action.taxons,
+        doctors: action.doctors,
       };
-    case GET_PRODUCTS_FAILED:
-      return {...state, loading: false, error: action.message, taxons: []};
+    case GET_DOCTORS_FAILED:
+      return {...state, loading: false};
     default:
       return state;
   }

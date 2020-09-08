@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 import {patientLogin, doctorLogin} from './actions';
 import {Validation} from '../Utils';
 import {Role} from '../Utils/Constants';
+import Toast from 'react-native-simple-toast';
 
 const Login = (props) => {
   const [email, setEmail] = useState('');

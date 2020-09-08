@@ -1,28 +1,27 @@
 import {
-  GET_PRODUCTS,
-  GET_PRODUCTS_FAILED,
-  GET_PRODUCTS_SUCCESS,
+  GET_DOCTORS,
+  GET_DOCTORS_SUCCESS,
+  GET_DOCTORS_FAILED,
 } from './constants';
-import {MedApi} from '../../services';
+import {polyclinicApi} from '../../services';
 
-export const getProducts = (path) => {
+export const getProducts = (query) => {
   return (dispatch) => {
-    dispatch({type: GET_PRODUCTS});
-    MedApi.ProductLst(path)
+    dispatch({type: GET_DOCTORS});
+    polyclinicApi
+      .DoctoBySpeciality(query)
       .then((response) => {
-        console.log('CALELD', response);
         if (response.status === 200) {
           console.log(response.data);
-          dispatch({type: GET_PRODUCTS_SUCCESS, taxons: response.data});
+          dispatch({type: GET_DOCTORS_SUCCESS, doctors: response.data});
         } else {
           dispatch({
-            type: GET_PRODUCTS_FAILED,
-            message: 'Something went wrong!',
+            type: GET_DOCTORS_FAILED,
           });
         }
       })
       .catch((error) => {
-        dispatch({type: GET_PRODUCTS_FAILED, message: error});
+        dispatch({type: GET_DOCTORS_FAILED});
       });
   };
 };

@@ -18,6 +18,8 @@ const SignUpDoc = (body) => api.post('/doctors/create', body, {});
 const SignUpPatient = (body) => api.post('/patients/signup', body, {});
 const PatientLogin = (body) => api.post('/patients/login', body, {});
 const DoctorLogin = (body) => api.post('/doctors/login', body, {});
+const DoctoBySpeciality = (query) =>
+  api.get(`/doctors/getDoctorsBySpecialty/?speciality=${query}`, {});
 
 export default {
   setHeaderWithToken,
@@ -25,4 +27,5 @@ export default {
   SignUpPatient,
   PatientLogin,
   DoctorLogin,
+  DoctoBySpeciality,
 };

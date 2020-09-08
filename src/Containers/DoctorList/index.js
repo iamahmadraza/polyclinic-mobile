@@ -41,7 +41,7 @@ const DATA = [
   },
 ];
 
-const Item = ({item}) => {
+const Item = ({item, navigation}) => {
   return (
     <View style={styles.itemContainer}>
       <View style={styles.listContainer}>
@@ -77,7 +77,10 @@ const Item = ({item}) => {
         <TouchableOpacity style={styles.buttonCotainer} activeOpacity={0.8}>
           <Text style={styles.buttonText}>Consult Now</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonCotainer} activeOpacity={0.8}>
+        <TouchableOpacity
+          style={styles.buttonCotainer}
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate('OffAppointment')}>
           <Text style={styles.buttonText}>Book Appointment</Text>
         </TouchableOpacity>
       </View>
@@ -86,7 +89,9 @@ const Item = ({item}) => {
 };
 
 const DoctorList = (props) => {
-  const renderItem = ({item}) => <Item item={item} />;
+  const renderItem = ({item}) => (
+    <Item item={item} navigation={props.navigation} />
+  );
 
   return (
     <Container>

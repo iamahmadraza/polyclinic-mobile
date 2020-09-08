@@ -2,6 +2,7 @@ import {LOGIN, LOGIN_SUCCESS, LOGIN_FAILED} from './constants';
 import {polyclinicApi} from '../../Services';
 import AsyncStorage from '@react-native-community/async-storage';
 import {Role} from '../Utils/Constants';
+import Toast from 'react-native-simple-toast';
 
 export const patientLogin = (data, navigation) => {
   return (dispatch) => {
@@ -20,10 +21,12 @@ export const patientLogin = (data, navigation) => {
             routes: [{name: 'Patient'}],
           });
         } else {
+          Toast.showWithGravity(response.data.Message, Toast.LONG, Toast.TOP);
           dispatch({type: LOGIN_FAILED, message: response.data.message});
         }
       })
       .catch((error) => {
+        Toast.showWithGravity('Something went wrong', Toast.LONG, Toast.TOP);
         dispatch({type: LOGIN_FAILED, message: error});
       });
   };
@@ -35,6 +38,7 @@ export const doctorLogin = (data, navigation) => {
     polyclinicApi
       .DoctorLogin(data, {})
       .then((response) => {
+        console.log(response, 'skjsjsjk');
         if (response.status === 200) {
           dispatch({type: LOGIN_SUCCESS, user: response.data.user});
           let token = response.data.access_token;
