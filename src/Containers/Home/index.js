@@ -26,15 +26,15 @@ const Home = (props) => {
         alwaysBounceVertical={false}>
         <View style={styles.cardContainer}>
           {renderCard('Book Appointment', Images.bookAppointment, 'Speciality')}
-          {renderCard('Online Booking', Images.onlineBooking, '')}
+          {renderCard('Online Doctor', Images.onlineBooking, '')}
         </View>
         <View style={styles.cardContainer}>
           {renderCard('Book Lab Test', Images.bookLabTest, '')}
           {renderCard('Clinical Procedure', Images.clinicalProcedure, '')}
         </View>
         <View style={styles.cardContainer}>
-          {renderCard('Medical History', Images.medicalHistory, '')}
-          {renderCard('Search Disease', Images.searchDisease, '')}
+          {renderCard('CT Scan MRI', Images.medicalHistory, '')}
+          {renderCard('Dentistry', Images.searchDisease, '')}
         </View>
       </ScrollView>
     </Container>

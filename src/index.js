@@ -24,7 +24,10 @@ function PatientStack() {
         headerTitleStyle: {
           ...Fonts.style.title,
           color: 'white',
+          // alignSelf: 'center',
         },
+        headerTitleAlign: 'center',
+        headerTitleAllowFontScaling: true,
       }}>
       <Stack.Screen
         name="Home"

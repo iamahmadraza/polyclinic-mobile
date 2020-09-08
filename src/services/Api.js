@@ -1,7 +1,7 @@
 import apisauce from 'apisauce';
 // import {BASE_URL} from 'react-native-dotenv';
 
-const baseURL = 'google.com';
+const baseURL = 'http://doctor-app-backend.herokuapp.com';
 
 const api = apisauce.create({
   baseURL,
@@ -14,9 +14,15 @@ const setHeaderWithToken = (token) => {
   }
 };
 
-const SignUp = (body) => api.post('/doctor/create', body);
+const SignUpDoc = (body) => api.post('/doctors/create', body, {});
+const SignUpPatient = (body) => api.post('/patients/signup', body, {});
+const PatientLogin = (body) => api.post('/patients/login', body, {});
+const DoctorLogin = (body) => api.post('/doctors/login', body, {});
 
 export default {
   setHeaderWithToken,
-  SignUp,
+  SignUpDoc,
+  SignUpPatient,
+  PatientLogin,
+  DoctorLogin,
 };

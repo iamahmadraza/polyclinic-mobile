@@ -9,10 +9,8 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOGIN:
-      console.log('CALLELLD')
       return {...state, error: '', loading: true};
     case LOGIN_SUCCESS:
-      console.log('CALLELLD2')
       return {
         ...state,
         error: '',
@@ -20,7 +18,6 @@ export default (state = INITIAL_STATE, action) => {
         user: action.user,
       };
     case LOGIN_FAILED:
-      console.log('CALLELLd3')
       return {...state, loading: false, error: action.message};
     default:
       return state;

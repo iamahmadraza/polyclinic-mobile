@@ -6,87 +6,110 @@ import AppButton from '../../Components/AppButton';
 import ScreenHeading from '../../Components/ScreenHeading';
 import styles from './styles';
 import {connect} from 'react-redux';
-import {UserLogin} from './actions';
+import {patientLogin, doctorLogin} from './actions';
 import {Validation} from '../Utils';
 import {Role} from '../Utils/Constants';
 
 const Login = (props) => {
-  const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userNameError, setUserNameError] = useState('');
-  const [passError, setPassError] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [phoneNumberError, setPhoneNumberError] = useState('');
 
-  const onChangeHandler = (text, func) => {
+  const onChangeHandler = (text, func, errorFunc) => {
     func(text);
+    errorFunc('');
   };
 
-  const validationCheck = (text) => {
-    let errorType = text;
-
-    switch (errorType) {
-      case 'username':
-        setUserNameError(Validation.Email(userName));
-        break;
-      case 'password':
-        setPassError(Validation.Password(password));
-        break;
-      default:
-        setUserNameError(Validation.Email(userName));
-        setPassError(Validation.Password(password));
+  const validationCheck = () => {
+    setEmailError(Validation.ValidateEmail(email));
+    setPasswordError(Validation.ValidatePassword(password));
+    setPhoneNumberError(Validation.ValidateEmpty(phoneNumber));
+    if (passwordError === '') {
+      if (props.role === Role.Doctor) {
+        if (phoneNumberError === '') {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        if (emailError === '') {
+          return true;
+        } else {
+          return false;
+        }
+      }
     }
+    return false;
   };
 
   const onSubmit = async () => {
-    props.navigation.reset({
-      routes: [{name: props.role === Role.Patient ? 'Patient' : 'Doctor'}],
-    });
-    // await validationCheck('password');
-    // await validationCheck('username');
-    // if (userNameError === '' && passError === '') {
-    //   let formData = {
-    //     email: userName,
-    //     password: password,
-    //   };
-    //   props.authorizeLogin(formData, props.navigation);
-    // }
+    if (validationCheck()) {
+      if (props.role === Role.Doctor) {
+        let data = {
+          phoneNumber,
+          password,
+        };
+        props.doctorLogin(data, props.navigation);
+      } else {
+        let data = {
+          email,
+          password,
+        };
+        props.patientLogin(data, props.navigation);
+      }
+    }
   };
 
   const forgotPassword = () => {
-    props.navigation.navigate('ForgotPassword', {});
+    console.log('No implemented Yet');
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <ScreenHeading name="Sign In" />
       <KeyboardAwareScrollView contentContainerStyle={styles.innerContainer}>
-        <AppInputField
-          containerStyles={styles.userNameInput}
-          fieldLabel={'Enter Phone Number'}
-          inputStyles={styles.inputStylesUsername}
-          onChangeText={(text) => onChangeHandler(text, setUserName)}
-          errorText={userNameError}
-          value={userName}
-        />
+        {props.role === Role.Doctor ? (
+          <AppInputField
+            containerStyles={styles.userNameInput}
+            fieldLabel={'Enter Phone Number'}
+            inputStyles={styles.inputStylesUsername}
+            onChangeText={(text) =>
+              onChangeHandler(text, setPhoneNumber, setPhoneNumberError)
+            }
+            errorText={phoneNumberError}
+            value={phoneNumber}
+          />
+        ) : (
+          <AppInputField
+            containerStyles={styles.userNameInput}
+            fieldLabel={'Enter Email'}
+            inputStyles={styles.inputStylesUsername}
+            onChangeText={(text) =>
+              onChangeHandler(text, setEmail, setEmailError)
+            }
+            errorText={emailError}
+            value={email}
+          />
+        )}
         <AppInputField
           inputStyles={styles.inputStylesPassword}
-          onChangeText={(text) => onChangeHandler(text, setPassword)}
+          onChangeText={(text) =>
+            onChangeHandler(text, setPassword, setPasswordError)
+          }
           fieldLabel={'Enter Password'}
-          errorText={passError}
+          errorText={passwordError}
           secureTextEntry={true}
+          value={password}
         />
         <AppButton
-          // loading={props.loading}
+          loading={props.loading}
           onPress={() => onSubmit()}
-          buttonMainContainerStyles={
-            // props.error !== ''
-            // ? styles.loginButtonStylesWithError
-            styles.loginButtonStyles
-          }
+          buttonMainContainerStyles={styles.loginButtonStyles}
           label={'Sign In'}
         />
-        {props.error !== '' && (
-          <Text style={styles.errorTextLogin}>{props.error}</Text>
-        )}
         <TouchableOpacity onPress={() => forgotPassword()}>
           <Text style={styles.textStyle}>Forgot Password?</Text>
         </TouchableOpacity>
@@ -104,15 +127,20 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
   const {role} = state.roleState;
+  const {loading} = state.loginState;
   return {
     role,
+    loading,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
-  authorizeLogin: (data, navigation) => {
-    dispatch(UserLogin(data, navigation));
+  patientLogin: (data, navigation) => {
+    dispatch(patientLogin(data, navigation));
+  },
+  doctorLogin: (data, navigation) => {
+    dispatch(doctorLogin(data, navigation));
   },
 });
 

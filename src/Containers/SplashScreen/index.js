@@ -2,14 +2,21 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, Animated} from 'react-native';
 import styles from './styles';
 import AsyncStorage from '@react-native-community/async-storage';
-import {Images} from '../Utils';
+import {Role} from '../Utils/Constants';
 
 const isUserLoggin = async (navigation) => {
   await AsyncStorage.getItem('accessToken').then((value) => {
     if (value !== null) {
-      navigation.reset({
-        routes: [{name: 'Patient'}],
-      });
+      var role = AsyncStorage.getItem('role');
+      if (role === Role.Doctor) {
+        navigation.reset({
+          routes: [{name: 'Doctor'}],
+        });
+      } else {
+        navigation.reset({
+          routes: [{name: 'Patient'}],
+        });
+      }
     } else {
       navigation.reset({
         routes: [{name: 'Category'}],
@@ -28,6 +35,7 @@ const Splash = (props) => {
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 3000,
+      useNativeDriver: true,
     }).start();
   }, []);
 

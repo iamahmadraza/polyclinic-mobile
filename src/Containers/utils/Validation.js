@@ -1,4 +1,4 @@
-const Email = text => {
+const ValidateEmail = (text) => {
   let error = '';
   let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (text === '') {
@@ -11,7 +11,7 @@ const Email = text => {
   return error;
 };
 
-const Password = text => {
+const ValidatePassword = (text) => {
   let error = '';
   if (text === '') {
     error = 'Please complete this field';
@@ -23,7 +23,16 @@ const Password = text => {
   return error;
 };
 
+const ValidateEmpty = (text) => {
+  let error = '';
+  if (text === '') {
+    error = 'Please complete this field';
+  }
+  return error;
+};
+
 export default {
-  Email,
-  Password,
+  ValidateEmail,
+  ValidatePassword,
+  ValidateEmpty,
 };
