@@ -13,6 +13,8 @@ import Category from './Containers/Category';
 import DoctorForm from './Containers/DoctorForm';
 import AddOnlineAppoitment from './Containers/AddOnlineAppointment';
 import AddOfflineAppoitment from './Containers/AddOfflineAppointment';
+import DoctorHome from './Containers/DoctorHome';
+import Appointment from './Containers/Appointment';
 
 const Stack = createStackNavigator();
 
@@ -26,8 +28,8 @@ function PatientStack() {
         headerTintColor: '#fff',
         headerTitleStyle: {
           ...Fonts.style.title,
+          fontSize: 18,
           color: 'white',
-          // alignSelf: 'center',
         },
         headerTitleAlign: 'center',
         headerTitleAllowFontScaling: true,
@@ -43,7 +45,7 @@ function PatientStack() {
         name="Speciality"
         component={Speciality}
         options={{
-          title: 'Choose Speciality',
+          title: 'Specialities',
         }}
       />
       <Stack.Screen
@@ -54,17 +56,10 @@ function PatientStack() {
         }}
       />
       <Stack.Screen
-        name="OnlineAppointment"
-        component={AddOnlineAppoitment}
+        name="Appointment"
+        component={Appointment}
         options={{
-          title: 'Create Online Appointment',
-        }}
-      />
-      <Stack.Screen
-        name="OffAppointment"
-        component={AddOfflineAppoitment}
-        options={{
-          title: 'Add Offline Appointment',
+          title: 'Book Appointment',
         }}
       />
     </Stack.Navigator>
@@ -79,16 +74,39 @@ function DoctorStack() {
           backgroundColor: Colors.appColor,
         },
         headerTintColor: '#fff',
+        headerTitleAlign: 'center',
         headerTitleStyle: {
           ...Fonts.style.title,
+          fontSize: 18,
           color: 'white',
         },
       }}>
       <Stack.Screen
         name="DoctorHome"
-        component={DoctorForm}
+        component={DoctorHome}
         options={{
           title: 'Home',
+        }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={DoctorForm}
+        options={{
+          title: 'Doctor Profile',
+        }}
+      />
+      <Stack.Screen
+        name="OnlineAppointment"
+        component={AddOnlineAppoitment}
+        options={{
+          title: 'Online Appointment',
+        }}
+      />
+      <Stack.Screen
+        name="OfflineAppointment"
+        component={AddOfflineAppoitment}
+        options={{
+          title: 'On Site Appointment',
         }}
       />
     </Stack.Navigator>

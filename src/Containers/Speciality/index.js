@@ -33,7 +33,11 @@ const Item = (data) => {
   return (
     <TouchableOpacity
       style={styles.listContainer}
-      onPress={() => data.props.navigation.navigate('DoctorList')}>
+      onPress={() =>
+        data.props.navigation.navigate('DoctorList', {
+          speciality: data.title,
+        })
+      }>
       <View style={styles.listInnerContainer}>
         <Image
           style={styles.listIcon}
@@ -56,26 +60,24 @@ const Item = (data) => {
 
 const Speciality = (props) => {
   const renderItem = ({item}) => (
-    <Item title={item.title} description={item.description} props={props} />
+    <Item title={item.name} description={item.description} props={props} />
   );
 
   return (
     <Container>
       <FlatList
-        data={DATA}
+        data={props.specialitiesFull}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
       />
     </Container>
   );
 };
 
 const mapStateToProps = (state) => {
-  // const {loading, error, taxons} = state.homeState;
+  const {specialitiesFull} = state.doctorState;
   return {
-    // loading,
-    // error,
-    // taxons,
+    specialitiesFull,
   };
 };
 

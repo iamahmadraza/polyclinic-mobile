@@ -3,7 +3,6 @@ import {Metrics, Fonts, Colors} from '../Utils';
 export default StyleSheet.create({
   container: {
     ...Metrics.containerStyle,
-    justifyContent: 'center',
   },
   card: {
     height: Metrics.screenWidth / 2 - 30,
@@ -15,6 +14,12 @@ export default StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  logoutCotainer: {
+    // backgroundColor: 'red',
+    width: '100%',
+    padding: 20,
+    alignItems: 'flex-end',
   },
   cardText: {
     ...Fonts.style.subHeading,
@@ -28,5 +33,13 @@ export default StyleSheet.create({
   cardContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  logout: {
+    ...Fonts.style.input,
+    color: Colors.appColor,
+    borderColor: Colors.appColor,
+    borderWidth: 1,
+    paddingHorizontal: 5,
+    borderRadius: 5,
   },
 });

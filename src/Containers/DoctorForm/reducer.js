@@ -1,24 +1,24 @@
-import {GET_TAXONS, GET_TAXONS_SUCCESS, GET_TAXONS_FAILED} from './constants';
+import {
+  UPDATE_PROFILE,
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_FAIL,
+} from './constants';
 
 const INITIAL_STATE = {
-  error: '',
   loading: false,
-  taxons: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case GET_TAXONS:
-      return {...state, error: '', loading: true};
-    case GET_TAXONS_SUCCESS:
+    case UPDATE_PROFILE:
+      return {...state, loading: true};
+    case UPDATE_PROFILE_SUCCESS:
       return {
         ...state,
-        error: '',
         loading: false,
-        taxons: action.taxons,
       };
-    case GET_TAXONS_FAILED:
-      return {...state, loading: false, error: action.message, taxons: []};
+    case UPDATE_PROFILE_FAIL:
+      return {...state, loading: false};
     default:
       return state;
   }

@@ -14,12 +14,20 @@ const setHeaderWithToken = (token) => {
   }
 };
 
-const SignUpDoc = (body) => api.post('/doctors/create', body, {});
+//PatientAPI
 const SignUpPatient = (body) => api.post('/patients/signup', body, {});
 const PatientLogin = (body) => api.post('/patients/login', body, {});
+
+//DoctorAPI
+const SignUpDoc = (body) => api.post('/doctors/create', body, {});
 const DoctorLogin = (body) => api.post('/doctors/login', body, {});
+const GetSpecialities = () => api.get('/specialty/getAllSpecialty');
 const DoctoBySpeciality = (query) =>
-  api.get(`/doctors/getDoctorsBySpecialty/?speciality=${query}`, {});
+  api.get(`/doctors/getDoctorsBySpecialty/?Specialty=${query}`, {});
+const updateProfileDoc = (body) => api.put('/doctors/profileupdate', body, {});
+const addOnSiteAppointment = (body, id) =>
+  api.post(`/doctors/profileupdate/${id}`, body, {});
+const getHospitals = () => api.get('/hospital/get', {});
 
 export default {
   setHeaderWithToken,
@@ -28,4 +36,8 @@ export default {
   PatientLogin,
   DoctorLogin,
   DoctoBySpeciality,
+  GetSpecialities,
+  updateProfileDoc,
+  addOnSiteAppointment,
+  getHospitals,
 };

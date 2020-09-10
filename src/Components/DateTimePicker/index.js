@@ -1,60 +1,49 @@
 import React, {useState} from 'react';
-import {View, TextInput, Text, Button, Platform} from 'react-native';
+import {View, TextInput, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import moment from 'moment';
 
 const DateTimePickerComponent = (props) => {
-  const [date, setDate] = useState(new Date(1598051730000));
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
-    setDate(currentDate);
-  };
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
   };
 
-  const showDatepicker = () => {
-    showMode('date');
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
   };
 
-  const showTimepicker = () => {
-    showMode('time');
+  const handleConfirm = (date) => {
+    var data =
+      props.mode === 'time'
+        ? moment(date).format('h:mm a')
+        : moment(date).format('DD-MM-yyyy');
+    props.onChangeHandler(data);
+    hideDatePicker();
   };
+
   return (
-    // <View style={[styles.feildContainer, props.containerStyles]}>
-    //   <Text style={styles.fieldLabel}>{props.fieldLabel}</Text>
-    //   <TextInput
-    //     placeholder={props.fieldLabel}
-    //     style={[styles.input, props.inputStyles]}
-    //     onChangeText={(text) => props.onChangeText(text)}
-    //     autoCapitalize="none"
-    //     secureTextEntry={props.secureTextEntry}
-    //     value={props.value}
-    //   />
-    //   {props.errorText !== '' && (
-    //     <Text style={styles.errorLabel}>{props.errorText}</Text>
-    //   )}
-    // </View>
-    <View>
-      <View>
-        <Button onPress={showDatepicker} title="Show date picker!" />
-      </View>
-      <View>
-        <Button onPress={showTimepicker} title="Show time picker!" />
-      </View>
-      {show && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={mode}
-          is24Hour={true}
-          display="default"
-          onChange={onChange}
-        />
+    <View style={[styles.feildContainer, props.containerStyles]}>
+      <Text style={styles.fieldLabel}>{props.fieldLabel}</Text>
+      <TouchableOpacity onPress={() => showDatePicker()}>
+        <View style={[styles.input, props.inputStyles]}>
+          <Text style={[styles.fieldLabel, !props.value && {color: '#b5b5b5'}]}>
+            {props.value ? props.value : 'Select Date'}
+          </Text>
+        </View>
+      </TouchableOpacity>
+
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode={props.mode ? props.mode : 'date'}
+        value={props.value}
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+      />
+      {props.errorText !== '' && (
+        <Text style={styles.errorLabel}>{props.errorText}</Text>
       )}
     </View>
   );

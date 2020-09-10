@@ -9,7 +9,6 @@ import {connect} from 'react-redux';
 import {patientLogin, doctorLogin} from './actions';
 import {Validation} from '../Utils';
 import {Role} from '../Utils/Constants';
-import Toast from 'react-native-simple-toast';
 
 const Login = (props) => {
   const [email, setEmail] = useState('');
@@ -28,29 +27,31 @@ const Login = (props) => {
     setEmailError(Validation.ValidateEmail(email));
     setPasswordError(Validation.ValidatePassword(password));
     setPhoneNumberError(Validation.ValidateEmpty(phoneNumber));
-    if (passwordError === '') {
+
+    if (password !== '') {
       if (props.role === Role.Doctor) {
-        if (phoneNumberError === '') {
+        if (phoneNumber !== '') {
           return true;
         } else {
           return false;
         }
       } else {
-        if (emailError === '') {
+        if (email !== '') {
           return true;
         } else {
           return false;
         }
       }
+    } else {
+      return false;
     }
-    return false;
   };
 
   const onSubmit = async () => {
     if (validationCheck()) {
       if (props.role === Role.Doctor) {
         let data = {
-          phoneNumber,
+          phone: phoneNumber,
           password,
         };
         props.doctorLogin(data, props.navigation);

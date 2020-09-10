@@ -19,21 +19,13 @@ export default StyleSheet.create({
     shadowColor: Colors.appColor,
     shadowOpacity: 0.2,
   },
-  listContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    // backgroundColor: 'red',
-  },
   listInnerContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
     paddingVertical: 5,
   },
   listIcon: {
-    height: 40,
-    width: 40,
+    height: 50,
+    width: 50,
   },
   listArrowIcon: {
     height: 15,
@@ -42,10 +34,22 @@ export default StyleSheet.create({
   listTextContainer: {
     marginLeft: Metrics.normalMargin,
   },
+  contactContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   name: {
     ...Fonts.style.label,
     fontWeight: '700',
     color: Colors.appColor,
+  },
+  phoneNumber: {
+    ...Fonts.style.input,
+    color: Colors.redShade,
+  },
+  location: {
+    ...Fonts.style.input,
+    color: Colors.forestgreen,
   },
   status: {
     color: Colors.redShade,
@@ -79,5 +83,15 @@ export default StyleSheet.create({
   buttonText: {
     ...Fonts.style.input,
     color: 'white',
+  },
+  noDataFound: {
+    paddingVertical: Metrics.baseMargin,
+    ...Fonts.style.subHeading,
+    color: Colors.appColor,
+  },
+  pmdc: {
+    ...Fonts.style.error,
+    color: Colors.redShade,
+    fontWeight: 'bold',
   },
 });

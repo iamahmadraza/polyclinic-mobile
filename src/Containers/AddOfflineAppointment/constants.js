@@ -1,3 +1,3 @@
-export const GET_TAXONS = 'app/Home/GET_TAXONS';
-export const GET_TAXONS_SUCCESS = 'app/Home/GET_TAXONS_SUCCESS';
-export const GET_TAXONS_FAILED = 'app/Home/GET_TAXONS_FAILED';
+export const ADD_APPOINTMENT = 'app/Doctor/ADD_APPOINTMENT';
+export const ADD_APPOINTMENT_SUCCESS = 'app/Doctor/ADD_APPOINTMENT_SUCCESS';
+export const ADD_APPOINTMENT_FAILED = 'app/Doctor/ADD_APPOINTMENT_FAILED';

@@ -5,6 +5,7 @@ const colors = {
   textColor: 'black',
   error: '#FF0000',
   redShade: '#cb7267',
+  forestgreen: '#228B22',
 };
 
 export default colors;

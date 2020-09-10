@@ -10,9 +10,7 @@ export const getProducts = (path) => {
     dispatch({type: GET_PRODUCTS});
     MedApi.ProductLst(path)
       .then((response) => {
-        console.log('CALELD', response);
         if (response.status === 200) {
-          console.log(response.data);
           dispatch({type: GET_PRODUCTS_SUCCESS, taxons: response.data});
         } else {
           dispatch({

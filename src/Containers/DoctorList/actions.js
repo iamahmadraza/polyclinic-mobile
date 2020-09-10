@@ -3,17 +3,16 @@ import {
   GET_DOCTORS_SUCCESS,
   GET_DOCTORS_FAILED,
 } from './constants';
-import {polyclinicApi} from '../../services';
+import {polyclinicApi} from '../../Services';
 
-export const getProducts = (query) => {
+export const getDoctor = (query) => {
   return (dispatch) => {
     dispatch({type: GET_DOCTORS});
     polyclinicApi
       .DoctoBySpeciality(query)
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data);
-          dispatch({type: GET_DOCTORS_SUCCESS, doctors: response.data});
+          dispatch({type: GET_DOCTORS_SUCCESS, doctors: response.data.Data});
         } else {
           dispatch({
             type: GET_DOCTORS_FAILED,

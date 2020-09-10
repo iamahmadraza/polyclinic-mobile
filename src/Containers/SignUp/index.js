@@ -43,14 +43,14 @@ const SignUp = (props) => {
     setPhoneNumberError(Validation.ValidateEmpty(phoneNumber));
     setConfirmPasswordError(Validation.ValidateEmpty(confirmPassword));
     if (
-      emailError === '' &&
-      passwordError === '' &&
-      nameError === '' &&
-      phoneNumberError === '' &&
-      confirmPasswordError === ''
+      email !== '' &&
+      password !== '' &&
+      name !== '' &&
+      phoneNumber !== '' &&
+      confirmPassword !== ''
     ) {
       if (props.role === Role.Doctor) {
-        return pmdcError === '';
+        return pmdc !== '';
       } else {
         return true;
       }
@@ -117,7 +117,7 @@ const SignUp = (props) => {
         {props.role === Role.Doctor && (
           <AppInputField
             containerStyles={[styles.input, styles.marginTop]}
-            fieldLabel={'Enter PMDC'}
+            fieldLabel={'Enter PMDC Number'}
             inputStyles={styles.inputStylesUsername}
             onChangeText={(text) =>
               onChangeHandler(text, setPMDC, setPMDCError)

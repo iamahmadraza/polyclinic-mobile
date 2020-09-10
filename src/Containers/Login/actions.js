@@ -10,13 +10,13 @@ export const patientLogin = (data, navigation) => {
     polyclinicApi
       .PatientLogin(data, {})
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
-          dispatch({type: LOGIN_SUCCESS, user: response.data.user});
-          let token = response.data.access_token;
-          polyclinicApi.setHeaderWithToken(response.data.access_token);
+          dispatch({type: LOGIN_SUCCESS, user: response.data.patient});
+          let token = response.data.token;
+          polyclinicApi.setHeaderWithToken(response.data.token);
           AsyncStorage.setItem('accessToken', JSON.stringify(token));
           AsyncStorage.setItem('role', Role.Patient);
+          AsyncStorage.setItem('user', JSON.stringify(response.data.Patient));
           navigation.reset({
             routes: [{name: 'Patient'}],
           });
@@ -38,21 +38,23 @@ export const doctorLogin = (data, navigation) => {
     polyclinicApi
       .DoctorLogin(data, {})
       .then((response) => {
-        console.log(response, 'skjsjsjk');
         if (response.status === 200) {
           dispatch({type: LOGIN_SUCCESS, user: response.data.user});
-          let token = response.data.access_token;
-          polyclinicApi.setHeaderWithToken(response.data.access_token);
+          let token = response.data.token;
+          polyclinicApi.setHeaderWithToken(response.data.token);
           AsyncStorage.setItem('accessToken', JSON.stringify(token));
           AsyncStorage.setItem('role', Role.Doctor);
+          AsyncStorage.setItem('user', JSON.stringify(response.data.doctor));
           navigation.reset({
             routes: [{name: 'Doctor'}],
           });
         } else {
+          Toast.showWithGravity(response.data.Message, Toast.LONG, Toast.TOP);
           dispatch({type: LOGIN_FAILED, message: response.data.message});
         }
       })
       .catch((error) => {
+        Toast.showWithGravity('Something went wrong', Toast.LONG, Toast.TOP);
         dispatch({type: LOGIN_FAILED, message: error});
       });
   };

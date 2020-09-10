@@ -2,8 +2,9 @@ import {StyleSheet, Platform} from 'react-native';
 import {Metrics, Fonts, Colors} from '../Utils';
 export default StyleSheet.create({
   container: {
-    ...Metrics.containerStyle,
-    justifyContent: 'center',
+    // ...Metrics.containerStyle,
+    flexGrow: 1,
+    paddingVertical: 10,
   },
   card: {
     height: Metrics.screenWidth / 2 - 30,

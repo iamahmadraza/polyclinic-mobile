@@ -39,6 +39,7 @@ export default StyleSheet.create({
   },
   listTextContainer: {
     marginLeft: Metrics.normalMargin,
+    width: Metrics.screenWidth - 130,
   },
   title: {
     ...Fonts.style.label,

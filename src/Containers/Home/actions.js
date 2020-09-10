@@ -6,7 +6,6 @@ export const GetTaxons = () => {
     dispatch({type: GET_TAXONS});
     MedApi.TaxonsList()
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
           let section = [];
           response.data.taxons.map((t) => {

@@ -5,116 +5,96 @@ import {connect} from 'react-redux';
 import Container from '../../Components/Container';
 import {Images} from '../Utils';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-
-const DATA = [
-  {
-    id: '1',
-    title: 'Ent',
-    Name: 'Ahmad Raza',
-    status: 'Online',
-    description: 'Ent....',
-    specialities: ['General', 'Ent'],
-  },
-  {
-    id: '2',
-    title: 'Surgen',
-    Name: 'Muneeb Zia',
-    status: 'Online',
-    description: 'Surgen....',
-    specialities: ['General', 'Sugren'],
-  },
-  {
-    id: '3',
-    title: 'Physician',
-    Name: 'Ifrahim Afzal',
-    status: 'Offline',
-    description: 'Physician....',
-    specialities: ['Physician', 'Sugren'],
-  },
-  {
-    id: '4',
-    title: 'General',
-    Name: 'Shajee Gardezi',
-    status: 'Online',
-    description: 'General....',
-    specialities: ['General', 'Sugren'],
-  },
-];
-
-const Item = ({item, navigation}) => {
-  return (
-    <View style={styles.itemContainer}>
-      <View style={styles.listContainer}>
-        <View>
-          <View style={styles.listInnerContainer}>
-            <Image
-              style={styles.listIcon}
-              source={Images.doctor}
-              resizeMode="contain"
-            />
-            <View style={styles.listTextContainer}>
-              <Text style={styles.name}>{item.Name}</Text>
-              <Text style={styles.status}>{item.status}</Text>
-            </View>
-          </View>
-          <Text style={styles.label}>Specialities:</Text>
-          <Text style={styles.specialities}>
-            {item.specialities.map((s, i) => (
-              <Text>
-                {s}
-                {i < item.specialities.length - 1 && ', '}
-              </Text>
-            ))}
-          </Text>
-        </View>
-        {/* <Image
-          style={styles.listArrowIcon}
-          source={Images.arrow}
-          resizeMode="contain"
-        /> */}
-      </View>
-      <View style={styles.bottomContainer}>
-        <TouchableOpacity style={styles.buttonCotainer} activeOpacity={0.8}>
-          <Text style={styles.buttonText}>Consult Now</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.buttonCotainer}
-          activeOpacity={0.8}
-          onPress={() => navigation.navigate('OffAppointment')}>
-          <Text style={styles.buttonText}>Book Appointment</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-};
+import {getDoctor} from './actions';
 
 const DoctorList = (props) => {
-  const renderItem = ({item}) => (
-    <Item item={item} navigation={props.navigation} />
-  );
+  useEffect(() => {
+    const {speciality} = props.route.params;
+    props.getDoctor(speciality);
+  }, []);
+
+  const Item = ({item}) => {
+    console.log(item, 'skskskjsjk');
+    return (
+      <View style={styles.itemContainer}>
+        <View style={styles.listInnerContainer}>
+          <Image
+            style={styles.listIcon}
+            source={Images.doctor}
+            resizeMode="contain"
+          />
+          <View style={styles.listTextContainer}>
+            <Text style={styles.name}>
+              {item.username ? item.username : 'Dummy Name'}
+            </Text>
+            <Text style={styles.pmdc}>PMDC License: {item.PMDC}</Text>
+            <Text style={styles.status}>{item.status ? item.status : ''}</Text>
+          </View>
+        </View>
+        <Text style={styles.label}>Specialities:</Text>
+        <Text style={styles.specialities}>
+          {item.doctorSpecialities.map((s, i) => (
+            <Text>
+              {s.name}
+              {i < item.doctorSpecialities.length - 1 && ', '}
+            </Text>
+          ))}
+        </Text>
+        <View style={styles.contactContainer}>
+          <View>
+            <Text style={styles.label}>Contact Number</Text>
+            <Text style={styles.phoneNumber}>{item.phone}</Text>
+          </View>
+          <View>
+            <Text style={styles.label}>Location</Text>
+            <Text style={styles.location}>{item.city}, Pakistan</Text>
+          </View>
+        </View>
+        <View style={styles.bottomContainer}>
+          <TouchableOpacity style={styles.buttonCotainer} activeOpacity={0.8}>
+            <Text style={styles.buttonText}>Consult Now</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonCotainer}
+            activeOpacity={0.8}
+            onPress={() => props.navigation.navigate('Appointment')}>
+            <Text style={styles.buttonText}>Book Appointment</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+  const renderItem = ({item}) => <Item item={item} />;
 
   return (
     <Container>
       <FlatList
-        data={DATA}
+        ListEmptyComponent={() => (
+          <Text style={styles.noDataFound}>
+            No doctor available in this speciality
+          </Text>
+        )}
+        data={props.doctors}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => index.toString()}
       />
     </Container>
   );
 };
 
 const mapStateToProps = (state) => {
-  // const {loading, error, taxons} = state.homeState;
+  const {loading, doctors} = state.doctorListState;
   return {
-    // loading,
-    // error,
-    // taxons,
+    loading,
+    doctors,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
+  getDoctor: (query) => {
+    dispatch(getDoctor(query));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DoctorList);

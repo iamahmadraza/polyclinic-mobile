@@ -9,18 +9,23 @@ export default StyleSheet.create({
     fontWeight: '500',
     color: Colors.appColor,
   },
+  fieldLabelDropDown: {
+    ...Fonts.style.input,
+    color: Colors.appColor,
+  },
   errorLabel: {
     ...Fonts.style.error,
   },
   input: {
     height: 45,
     marginTop: 5,
-    paddingHorizontal: 13,
     backgroundColor: '#ffffff',
     justifyContent: 'center',
     borderColor: Colors.appColor,
     borderWidth: 1,
     borderRadius: 5,
-    ...Fonts.style.input,
+  },
+  dropDownItemContainer: {
+    borderColor: Colors.appColor,
   },
 });

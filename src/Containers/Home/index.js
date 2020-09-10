@@ -3,10 +3,16 @@ import {Text, View, Image, TouchableOpacity} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Images} from '../Utils';
 import Container from '../../Components/Container';
+import {getSpecialities} from '../DoctorHome/actions';
 import styles from './styles';
 import {connect} from 'react-redux';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Home = (props) => {
+  useEffect(() => {
+    props.getSpecialities();
+  }, []);
+
   const renderCard = (label, source, route) => {
     return (
       <TouchableOpacity
@@ -21,6 +27,19 @@ const Home = (props) => {
 
   return (
     <Container>
+      <TouchableOpacity
+        style={styles.logoutCotainer}
+        onPress={() => {
+          AsyncStorage.removeItem('accessToken');
+          AsyncStorage.removeItem('role');
+          AsyncStorage.removeItem('user');
+          props.navigation.reset({
+            routes: [{name: 'Login'}],
+          });
+        }}
+        activeOpacity={0.6}>
+        <Text style={styles.logout}>Logout</Text>
+      </TouchableOpacity>
       <ScrollView
         contentContainerStyle={styles.container}
         alwaysBounceVertical={false}>
@@ -52,6 +71,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
+  getSpecialities: () => {
+    dispatch(getSpecialities());
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

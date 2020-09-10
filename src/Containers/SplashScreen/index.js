@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Animated} from 'react-native';
+import {Image, Animated} from 'react-native';
 import styles from './styles';
 import AsyncStorage from '@react-native-community/async-storage';
 import {Role} from '../Utils/Constants';
+import {Images} from '../Utils';
 
 const isUserLoggin = async (navigation) => {
-  await AsyncStorage.getItem('accessToken').then((value) => {
+  try {
+    const value = await AsyncStorage.getItem('accessToken');
+    const role = await AsyncStorage.getItem('role');
     if (value !== null) {
-      var role = AsyncStorage.getItem('role');
       if (role === Role.Doctor) {
         navigation.reset({
           routes: [{name: 'Doctor'}],
@@ -22,7 +24,9 @@ const isUserLoggin = async (navigation) => {
         routes: [{name: 'Category'}],
       });
     }
-  });
+  } catch (error) {
+    // Error retrieving data
+  }
 };
 
 const Splash = (props) => {
@@ -41,10 +45,7 @@ const Splash = (props) => {
 
   return (
     <Animated.View style={{...styles.container, opacity: fadeAnim}}>
-      <View style={styles.logoContainer}>
-        {/* <Image style={styles.logo} source={Images.logo} resizeMode="contain" /> */}
-        <Text style={styles.logoText}>Poly Clinic</Text>
-      </View>
+      <Image style={styles.logo} source={Images.logo} resizeMode="contain" />
     </Animated.View>
   );
 };
