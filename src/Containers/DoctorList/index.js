@@ -6,6 +6,7 @@ import Container from '../../Components/Container';
 import {Images} from '../Utils';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {getDoctor} from './actions';
+import Toast from 'react-native-simple-toast';
 
 const DoctorList = (props) => {
   useEffect(() => {
@@ -13,8 +14,19 @@ const DoctorList = (props) => {
     props.getDoctor(speciality);
   }, []);
 
+  const onBookAppointment = (data) => {
+    if (data.doctorAvailability.length > 0) {
+      props.navigation.navigate('Appointment', {
+        docId: data._id,
+        appointments: data.doctorAvailability,
+      });
+    } else {
+      Toast.showWithGravity('No Availbility', Toast.SHORT, Toast.TOP);
+    }
+  };
+
   const Item = ({item}) => {
-    console.log(item, 'skskskjsjk');
+    console.log(item);
     return (
       <View style={styles.itemContainer}>
         <View style={styles.listInnerContainer}>
@@ -57,7 +69,7 @@ const DoctorList = (props) => {
           <TouchableOpacity
             style={styles.buttonCotainer}
             activeOpacity={0.8}
-            onPress={() => props.navigation.navigate('Appointment')}>
+            onPress={() => onBookAppointment(item)}>
             <Text style={styles.buttonText}>Book Appointment</Text>
           </TouchableOpacity>
         </View>

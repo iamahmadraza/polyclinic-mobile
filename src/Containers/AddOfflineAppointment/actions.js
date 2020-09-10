@@ -10,8 +10,9 @@ export const addAppointment = (data, navigation) => {
   return (dispatch) => {
     dispatch({type: ADD_APPOINTMENT});
     polyclinicApi
-      .addOnSiteAppointment(data, data.id)
+      .addOnSiteAppointment([data], data.id)
       .then((response) => {
+        console.log(response);
         if (response.status === 200) {
           Toast.showWithGravity(
             'Appointment Created Successfully!',

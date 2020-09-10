@@ -6,6 +6,7 @@ import Doctor from './DoctorHome/reducer';
 import DoctorForm from './DoctorForm/reducer';
 import DoctorList from './DoctorList/reducer';
 import OnSiteAppointment from './AddOfflineAppointment/reducer';
+import AppointmentStore from './Appointment/reducer';
 
 const appReducer = combineReducers({
   roleState: Category,
@@ -15,5 +16,6 @@ const appReducer = combineReducers({
   doctorFormState: DoctorForm,
   onSiteAppointmentState: OnSiteAppointment,
   doctorListState: DoctorList,
+  appointmentState: AppointmentStore,
 });
 export default appReducer;

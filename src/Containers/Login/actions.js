@@ -16,7 +16,7 @@ export const patientLogin = (data, navigation) => {
           polyclinicApi.setHeaderWithToken(response.data.token);
           AsyncStorage.setItem('accessToken', JSON.stringify(token));
           AsyncStorage.setItem('role', Role.Patient);
-          AsyncStorage.setItem('user', JSON.stringify(response.data.Patient));
+          AsyncStorage.setItem('user', JSON.stringify(response.data.patient));
           navigation.reset({
             routes: [{name: 'Patient'}],
           });

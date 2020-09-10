@@ -28,6 +28,8 @@ const updateProfileDoc = (body) => api.put('/doctors/profileupdate', body, {});
 const addOnSiteAppointment = (body, id) =>
   api.post(`/doctors/profileupdate/${id}`, body, {});
 const getHospitals = () => api.get('/hospital/get', {});
+const bookAppointment = (body) =>
+  api.post('patients/postAppointment', body, {});
 
 export default {
   setHeaderWithToken,
@@ -40,4 +42,5 @@ export default {
   updateProfileDoc,
   addOnSiteAppointment,
   getHospitals,
+  bookAppointment,
 };
