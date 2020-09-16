@@ -39,6 +39,7 @@ export const getHospitals = () => {
   return (dispatch) => {
     polyclinicApi.getHospitals().then((response) => {
       if (response.status === 200) {
+        console.log(response.data.Data);
         const {Data} = response.data;
         let hospitals = [];
         Data.map((a) => {

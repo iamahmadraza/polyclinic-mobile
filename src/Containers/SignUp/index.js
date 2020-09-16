@@ -63,7 +63,7 @@ const SignUp = (props) => {
     const body = {
       email,
       phone: phoneNumber,
-      usename: name,
+      username: name,
       password,
     };
     if (validationCheck()) {

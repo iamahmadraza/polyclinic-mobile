@@ -18,6 +18,7 @@ const DoctorList = (props) => {
     if (data.doctorAvailability.length > 0) {
       props.navigation.navigate('Appointment', {
         docId: data._id,
+        phone: data.phone,
         appointments: data.doctorAvailability,
       });
     } else {

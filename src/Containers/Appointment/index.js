@@ -70,7 +70,7 @@ const Appointment = (props) => {
       <ScrollView alwaysBounceVertical={false}>
         <View style={styles.contactContainer}>
           <Text style={styles.contactLabel}>Available Contact Number</Text>
-          <Text style={styles.contactText}>0333-7860123</Text>
+          <Text style={styles.contactText}>{props.route.params.phone}</Text>
           <Text style={styles.helpLineText}>
             Helpline Timings: 9AM-9PM, 24/7
           </Text>
